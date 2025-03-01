@@ -1,20 +1,28 @@
-
-import './App.css'
+// src/App.jsx
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; 
+import Layout from "./layout/Layout";
+import HomePage from "./pages/HomePage";
+import ProductPage from "./pages/ProductPage";
+import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import CheckoutSuccessPage from "./pages/CheckoutSuccessPage";
+import ContactPage from "./pages/ContactPage";
 
 function App() {
-
-
   return (
-    <>
-     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 to-purple-600 text-white">
-      <h1 className="text-4xl font-bold md:text-6xl">Welcome to Quick-cart</h1>
-      <p className="mt-4 text-lg md:text-xl">Your one stop solution for all your shopping needs</p>
-      <button className="mt-6 px-6 py-3 bg-white text-blue-500 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition">
-        Click Me
-      </button>
-    </div>
-    </>
-  )
+    <Router>
+      <Layout> 
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/checkout-success" element={<CheckoutSuccessPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+      </Layout>
+    </Router>
+  );
 }
 
-export default App
+export default App;
