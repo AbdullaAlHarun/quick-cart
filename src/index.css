@@ -1,1 +1,47 @@
 @import "tailwindcss";
+
+/* Search Bar Enhancements */
+input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  input:focus {
+    border-color: #fbbf24;
+    box-shadow: 0 0 5px #fbbf24;
+  }
+  
+  /* Product Cards */
+  .bg-white {
+    background-color: white;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .bg-white:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Price Styling */
+  .text-red-500 {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .line-through {
+    color: #555;
+  }
+  
+  /* Buttons */
+  .bg-yellow-500 {
+    background: linear-gradient(to right, #fbbf24, #f59e0b);
+    transition: transform 0.2s;
+  }
+  
+  .bg-yellow-500:hover {
+    transform: scale(1.05);
+    background: linear-gradient(to right, #f59e0b, #d97706);
+  }
+  
