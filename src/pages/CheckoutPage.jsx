@@ -42,13 +42,18 @@ const CheckoutPage = () => {
     e.preventDefault();
     if (!validateForm()) return;
 
-    dispatch(clearCart());
-    navigate("/checkout-success");
+    // Navigate to Success Page with Total Price
+    navigate("/checkout-success", { state: { totalPrice } });
+
+    // Clear cart only AFTER navigating
+    setTimeout(() => {
+      dispatch(clearCart());
+    }, 500);
   };
 
   return (
     <div className="container mx-auto px-4 py-6">
-      <h1 className="text-3xl font-bold mb-6">Checkout</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">Checkout</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Left: Order Summary */}
@@ -81,49 +86,57 @@ const CheckoutPage = () => {
           <h2 className="text-lg font-semibold border-b pb-3">Shipping Details</h2>
           <form onSubmit={handleSubmit} className="mt-4 space-y-4">
             <div>
-              <label className="block font-semibold">Full Name</label>
+              <label htmlFor="name" className="block font-semibold">Full Name</label>
               <input
                 type="text"
+                id="name"
                 name="name"
                 value={form.name}
                 onChange={handleChange}
                 className="w-full border px-3 py-2 rounded-md focus:ring-2 focus:ring-blue-400"
+                required
               />
               {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
             </div>
 
             <div>
-              <label className="block font-semibold">Email Address</label>
+              <label htmlFor="email" className="block font-semibold">Email Address</label>
               <input
                 type="email"
+                id="email"
                 name="email"
                 value={form.email}
                 onChange={handleChange}
                 className="w-full border px-3 py-2 rounded-md focus:ring-2 focus:ring-blue-400"
+                required
               />
               {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
             </div>
 
             <div>
-              <label className="block font-semibold">Shipping Address</label>
+              <label htmlFor="address" className="block font-semibold">Shipping Address</label>
               <input
                 type="text"
+                id="address"
                 name="address"
                 value={form.address}
                 onChange={handleChange}
                 className="w-full border px-3 py-2 rounded-md focus:ring-2 focus:ring-blue-400"
+                required
               />
               {errors.address && <p className="text-red-500 text-sm">{errors.address}</p>}
             </div>
 
             <div>
-              <label className="block font-semibold">Phone Number</label>
+              <label htmlFor="phone" className="block font-semibold">Phone Number</label>
               <input
                 type="tel"
+                id="phone"
                 name="phone"
                 value={form.phone}
                 onChange={handleChange}
                 className="w-full border px-3 py-2 rounded-md focus:ring-2 focus:ring-blue-400"
+                required
               />
               {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
             </div>
