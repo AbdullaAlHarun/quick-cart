@@ -60,14 +60,23 @@ const HomePage = () => {
         </div>
       )}
 
-      {/* Trending & Deals Sections */}
+      {/* Trending Products */}
       <h1 className="text-3xl font-bold mb-6 text-gray-900">Trending Products</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.slice(0, 4).map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
+      <div className="text-center mt-6">
+        <Link
+          to="/products"
+          className="bg-gray-900 text-white px-6 py-2 rounded-md text-lg font-semibold hover:bg-gray-700 transition"
+        >
+          View More Products
+        </Link>
+      </div>
 
+      {/* Best Deals */}
       <h1 className="text-3xl font-bold mt-12 mb-6 text-gray-900">Best Deals</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products
@@ -76,6 +85,14 @@ const HomePage = () => {
           .map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
+      </div>
+      <div className="text-center mt-6">
+        <Link
+          to="/products"
+          className="bg-gray-900 text-white px-6 py-2 rounded-md text-lg font-semibold hover:bg-gray-700 transition"
+        >
+          View All Deals
+        </Link>
       </div>
     </div>
   );
