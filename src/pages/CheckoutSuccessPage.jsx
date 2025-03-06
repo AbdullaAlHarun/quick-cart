@@ -46,7 +46,7 @@ const CheckoutSuccessPage = () => {
       <div className="mt-6 opacity-0 animate-fadeInSlow">
         <Link
           to="/"
-          className="bg-black text-white px-6 py-3 rounded-md text-lg hover:bg-gray-900 transition duration-300 ease-in-out transform hover:scale-105"
+         className="bg-gray-900 text-white px-6 py-2 rounded-full text-lg font-medium hover:bg-gray-800 transition-all focus:ring-2 focus:ring-gray-500"
         >
           Continue Shopping
         </Link>

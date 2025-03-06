@@ -1,7 +1,7 @@
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, updateQuantity, clearCart } from "../store/cartSlice";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import { AiOutlineCheckSquare, AiFillCheckSquare } from "react-icons/ai";
 import visaLogo from "../assets/visa.png";
@@ -13,9 +13,8 @@ const CartPage = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // Manage Selected Items
   const [selectedItems, setSelectedItems] = useState({});
+  const [showModal, setShowModal] = useState(false); // ✅ Manage modal state
 
   const toggleSelection = (id) => {
     setSelectedItems((prev) => ({
@@ -24,7 +23,6 @@ const CartPage = () => {
     }));
   };
 
-  // Calculate Total Price
   const totalPrice = cartItems.reduce((acc, item) => acc + item.discountedPrice * item.quantity, 0);
 
   return (
@@ -36,9 +34,11 @@ const CartPage = () => {
         <div className="md:col-span-2 bg-white shadow-lg rounded-lg p-4">
           <div className="flex items-center justify-between border-b pb-3">
             <h2 className="text-lg font-semibold">All Items ({cartItems.length})</h2>
+
+            {/* ✅ Updated Clear Cart Button */}
             <button
-              onClick={() => dispatch(clearCart())}
-              className="text-red-500 hover:text-red-600 focus:ring-2 focus:ring-red-400"
+              onClick={() => setShowModal(true)} // ✅ Show the modal
+              className="bg-red-500 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-red-600 transition-all focus:ring-2 focus:ring-red-400"
             >
               Clear Cart
             </button>
@@ -49,23 +49,16 @@ const CartPage = () => {
           ) : (
             cartItems.map((item) => (
               <div key={item.id} className="flex items-center gap-4 py-4 border-b">
-                {/* Checkbox for selection */}
                 <button
                   className="text-gray-500 hover:text-gray-700 focus:ring-2 focus:ring-gray-400"
                   onClick={() => toggleSelection(item.id)}
                 >
                   {selectedItems[item.id] ? <AiFillCheckSquare size={22} /> : <AiOutlineCheckSquare size={22} />}
                 </button>
-
-                {/* Product Image */}
                 <img src={item.image.url} alt={item.title} className="w-20 h-20 object-cover rounded-md" loading="lazy" />
-
-                {/* Product Details */}
                 <div className="flex-1">
                   <p className="font-semibold">{item.title}</p>
                   <p className="text-gray-500 text-sm">${item.discountedPrice.toFixed(2)} each</p>
-
-                  {/* Quantity Selector */}
                   <select
                     value={item.quantity}
                     onChange={(e) => dispatch(updateQuantity({ id: item.id, quantity: Number(e.target.value) }))}
@@ -78,8 +71,6 @@ const CartPage = () => {
                     ))}
                   </select>
                 </div>
-
-                {/* Price & Remove Button */}
                 <p className="font-bold text-lg">${(item.discountedPrice * item.quantity).toFixed(2)}</p>
                 <button
                   onClick={() => dispatch(removeFromCart(item.id))}
@@ -96,20 +87,9 @@ const CartPage = () => {
         {/* Right Side: Order Summary */}
         <div className="bg-white shadow-lg rounded-lg p-4">
           <h2 className="text-lg font-semibold border-b pb-3">Order Summary</h2>
-
           <div className="py-3 text-lg flex justify-between">
             <span>Estimated Price:</span>
             <span className="font-bold">${totalPrice.toFixed(2)}</span>
-          </div>
-
-          {/* Coupon Code Input */}
-          <div className="flex items-center border rounded-md overflow-hidden">
-            <input
-              type="text"
-              placeholder="Enter Coupon Code"
-              className="flex-1 px-3 py-2 outline-none"
-            />
-            <button className="bg-gray-800 text-white px-4 py-2">Apply</button>
           </div>
 
           {/* Payment Methods */}
@@ -126,12 +106,43 @@ const CartPage = () => {
           {/* Checkout Button */}
           <button
             onClick={() => navigate("/checkout")}
-            className="w-full bg-black text-white mt-6 py-3 rounded-md text-lg font-semibold hover:bg-gray-900 focus:ring-2 focus:ring-gray-500"
+           className="w-full bg-gray-900 text-white px-6 py-2 rounded-full text-lg font-medium hover:bg-gray-800 transition-all focus:ring-2 focus:ring-gray-500"
           >
             Checkout Now
           </button>
         </div>
       </div>
+
+     {/* Modal for Clear Cart */}
+     {showModal && (
+      <div
+        className="fixed inset-0 flex justify-center items-center z-50"
+        style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }} 
+      >
+        <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+          <h2 className="text-lg font-semibold">Are you sure?</h2>
+          <p className="text-gray-600 mt-2">This will remove all items from your cart.</p>
+          <div className="flex justify-end gap-3 mt-4">
+            <button
+              onClick={() => setShowModal(false)}
+              className="px-4 py-2 rounded-md text-gray-700 border border-gray-300 hover:bg-gray-200 transition"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={() => {
+                dispatch(clearCart());
+                setShowModal(false);
+              }}
+              className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition"
+            >
+              Yes, Clear Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
+
     </div>
   );
 };

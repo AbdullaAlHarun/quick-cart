@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { FaShoppingCart } from "react-icons/fa";
 
 const CartIcon = () => {
-  const cartItems = useSelector((state) => state.cart?.items || []); // Ensure it's always an array
+  const cartItems = useSelector((state) => state.cart?.items || []); 
 
   return (
     <Link to="/cart" className="relative text-white hover:text-yellow-400">

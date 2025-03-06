@@ -52,7 +52,7 @@ const HomePage = () => {
             <p className="text-lg text-gray-300 mt-2">{featuredProduct.description.substring(0, 100)}...</p>
             <Link
               to={`/product/${featuredProduct.id}`}
-              className="mt-4 inline-block bg-yellow-500 text-black px-6 py-2 rounded-md text-lg font-semibold hover:bg-yellow-600 focus:ring-2 focus:ring-yellow-400"
+              className="mt-4 inline-block bg-white text-gray-900 px-6 py-2 rounded-full text-lg font-semibold shadow-md hover:bg-gray-200 transition-all focus:ring-2 focus:ring-gray-500"
             >
               View Product
             </Link>
@@ -62,7 +62,7 @@ const HomePage = () => {
 
       {/* Trending Products */}
       <h1 className="text-3xl font-bold mb-6 text-gray-900">Trending Products</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.slice(0, 4).map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
@@ -70,7 +70,7 @@ const HomePage = () => {
       <div className="text-center mt-6">
         <Link
           to="/products"
-          className="bg-gray-900 text-white px-6 py-2 rounded-md text-lg font-semibold hover:bg-gray-700 transition"
+          className="bg-gray-900 text-white px-6 py-2 rounded-full text-lg font-medium hover:bg-gray-800 transition-all focus:ring-2 focus:ring-gray-500"
         >
           View More Products
         </Link>
@@ -78,7 +78,7 @@ const HomePage = () => {
 
       {/* Best Deals */}
       <h1 className="text-3xl font-bold mt-12 mb-6 text-gray-900">Best Deals</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products
           .filter((product) => product.price > product.discountedPrice)
           .slice(0, 4)
@@ -89,7 +89,7 @@ const HomePage = () => {
       <div className="text-center mt-6">
         <Link
           to="/products"
-          className="bg-gray-900 text-white px-6 py-2 rounded-md text-lg font-semibold hover:bg-gray-700 transition"
+          className="bg-gray-900 text-white px-6 py-2 rounded-full text-lg font-medium hover:bg-gray-800 transition-all focus:ring-2 focus:ring-gray-500"
         >
           View All Deals
         </Link>

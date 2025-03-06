@@ -5,7 +5,7 @@ import { addToCart } from "../store/cartSlice";
 
 const ProductPage = () => {
   const { id } = useParams();
-  const dispatch = useDispatch(); // ✅ Moved inside the function
+  const dispatch = useDispatch();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -28,7 +28,19 @@ const ProductPage = () => {
     fetchProduct();
   }, [id]);
 
-  if (loading) return <p className="text-center text-lg">Loading product...</p>;
+  // 🟡 **Skeleton Loading Animation**
+  if (loading)
+    return (
+      <div className="flex flex-col justify-center items-center h-screen">
+        <div className="animate-pulse space-y-4 w-1/2">
+          <div className="h-8 bg-gray-300 rounded w-3/4"></div>
+          <div className="h-48 bg-gray-300 rounded"></div>
+          <div className="h-6 bg-gray-300 rounded w-1/2"></div>
+        </div>
+        <p className="text-lg text-gray-700 font-semibold">Loading Product...</p>
+      </div>
+    );
+
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
@@ -71,7 +83,7 @@ const ProductPage = () => {
           {/* Add to Cart Button */}
           <button
             onClick={() => dispatch(addToCart(product))}
-            className="mt-6 w-full md:w-auto bg-yellow-500 text-white px-6 py-3 rounded-md hover:bg-yellow-600 transition-all focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            className="mt-6 w-full md:w-auto bg-gray-900 text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-all focus:ring-2 focus:ring-gray-500 shadow-md"
           >
             Add to Cart
           </button>
