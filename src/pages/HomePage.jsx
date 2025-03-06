@@ -13,7 +13,17 @@ const HomePage = () => {
     }
   }, [dispatch, status]);
 
-  if (status === "loading") return <p className="text-center text-lg">Loading products...</p>;
+  // Loading Animation
+  if (status === "loading")
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="w-12 h-12 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-lg text-gray-700 font-semibold">Loading Products...</p>
+        </div>
+      </div>
+    );
+
   if (status === "failed") return <p className="text-center text-red-500">Error: {error}</p>;
 
   return (
