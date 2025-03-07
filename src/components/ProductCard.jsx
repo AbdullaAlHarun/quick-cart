@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg flex flex-col">
+    <div className="bg-white rounded-lg shadow-md p-4 transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg flex flex-col justify-between">
+      
       {/* Product Image */}
       <div className="relative w-full h-48">
         <img
@@ -19,12 +20,12 @@ const ProductCard = ({ product }) => {
         )}
       </div>
 
-      {/* Full Product Title - No Truncation */}
+      {/* Product Title - Full Title (No Truncate) */}
       <h2 className="text-md font-semibold mt-3 text-gray-900 leading-tight">
         {product.title}
       </h2>
 
-      {/* Product Description */}
+      {/* Product Description - Limited to Two Lines */}
       <p className="text-gray-600 text-sm mt-1 line-clamp-2">
         {product.description}
       </p>
@@ -32,19 +33,19 @@ const ProductCard = ({ product }) => {
       {/* Price Display */}
       <div className="mt-3 flex justify-start items-center gap-2">
         <span className="text-lg font-bold text-gray-900">
-          ${product.discountedPrice.toFixed(2)}
+          ${product.discountedPrice.toFixed(0)}
         </span>
         {product.price !== product.discountedPrice && (
           <span className="text-sm text-gray-500 line-through">
-            ${product.price.toFixed(2)}
+            ${product.price.toFixed(0)}
           </span>
         )}
       </div>
 
-      {/* Button */}
+      {/* Button  */}
       <Link
         to={`/product/${product.id}`}
-        className="mt-4 flex justify-center items-center bg-gray-900 text-white font-medium text-sm px-5 py-2 rounded-full hover:bg-gray-800 transition-all focus:ring-2 focus:ring-gray-500 focus:outline-none"
+        className="mt-auto w-full bg-gray-900 text-white font-medium text-[11px] lg:text-sm px-5 py-2 rounded-full hover:bg-gray-800 transition-all focus:ring-2 focus:ring-gray-500 focus:outline-none text-center"
         aria-label={`View details about ${product.title}`}
       >
         View Product
