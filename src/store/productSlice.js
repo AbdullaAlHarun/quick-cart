@@ -3,20 +3,17 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // API URL
 const API_URL = "https://v2.api.noroff.dev/online-shop";
 
-// ✅ Fix: Extract `data` from API response
 export const fetchProducts = createAsyncThunk("products/fetchProducts", async () => {
   const response = await fetch(API_URL);
   const result = await response.json();
-  console.log("API Response:", result); // ✅ Check API response in console
-
-  return result.data; // ✅ Ensure only `data` array is returned
+  return result.data;
 });
 
 // Product Slice
 const productSlice = createSlice({
   name: "products",
   initialState: {
-    products: [], // ✅ Ensure it's an array
+    products: [], 
     status: "idle",
     error: null,
   },
@@ -27,9 +24,8 @@ const productSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        console.log("Products stored in Redux:", action.payload); // ✅ Check if products are stored
         state.status = "succeeded";
-        state.products = action.payload || []; // ✅ Ensure an array is stored
+        state.products = action.payload || [];
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = "failed";
