@@ -48,7 +48,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-gray-900 text-white py-2 shadow-md relative">
+    <header className="bg-gray-900 text-white py-4 shadow-md relative">
       <div className="container mx-auto flex items-center justify-between px-4 lg:px-6">
 
         {/* Left Side: Burger Menu & Logo */}
